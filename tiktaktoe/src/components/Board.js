@@ -4,9 +4,9 @@ import { calculateWinner } from '../helpers'
 export function Board({ xIsNext, squares, onPlay }){
   function handleClick(i){
     const nextSquares = squares.slice();
+    onPlay(winner, nextSquares);
     if (nextSquares[i]) return
     nextSquares[i] = xIsNext ? 'X' : 'O';
-    onPlay(winner, nextSquares);
   }
   const winner = calculateWinner(squares);
   let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;

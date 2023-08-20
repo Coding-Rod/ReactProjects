@@ -6,7 +6,12 @@ export default function Game() {
   const [xIsNext, setXIsNext] = useState(true);
   
   function handlePlay(winner, nextSquares){
-    if (winner || squares.every(square => square)) setSquares(Array(9).fill(null)) // reset game
+    if (winner || squares.every(square => square)){
+      // Reset the game
+      setSquares(Array(9).fill(null))
+      setXIsNext(true)
+      return
+    }
     setXIsNext(!xIsNext)
     setSquares(nextSquares)
   }
