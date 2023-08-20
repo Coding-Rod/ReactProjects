@@ -1,4 +1,3 @@
-
 export function Square({value, onClick}){
 
     return (
