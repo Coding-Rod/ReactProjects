@@ -1,7 +1,13 @@
+import { TableRow, TableCell } from '@mui/material';
+
 export function ProductCategoryRow({ category }) {
     return (
-        <tr>
-            <th colSpan="2">{category}</th>
-        </tr>
+        <TableRow>
+            <TableCell 
+                colSpan="3"
+                align='center'
+                style={{ fontWeight: 'bold' }}
+            >{category}</TableCell>
+        </TableRow>
     );
 }

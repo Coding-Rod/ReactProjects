@@ -1,3 +1,5 @@
+import { TableRow, TableCell } from '@mui/material';
+
 export function ProductRow({ product }) {
     const name = product.stocked ? (
         product.name
@@ -6,9 +8,10 @@ export function ProductRow({ product }) {
     );
     
     return (
-        <tr>
-            <td>{name}</td>
-            <td>{product.price}</td>
-        </tr>
+        <TableRow style={{ backgroundColor: product.stocked ? 'white' : 'pink' }}>
+            <TableCell>{name}</TableCell>
+            <TableCell>{product.price}</TableCell>
+            <TableCell>{product.stocked ? 'Yes' : 'No'}</TableCell>
+        </TableRow>
     );
 }

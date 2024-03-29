@@ -1,8 +1,12 @@
+// Import levenshtein distance module
+import { distance } from 'fastest-levenshtein';
+
+import { Paper, TableContainer } from '@mui/material';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+
 import { ProductCategoryRow } from './ProductCategoryRow';
 import { ProductRow } from './ProductRow';
 
-// Import levenshtein distance module
-import { distance } from 'fastest-levenshtein';
 
 export function ProductTable({ products, filterText, inStockOnly }) {
     const rows = [];
@@ -34,16 +38,25 @@ export function ProductTable({ products, filterText, inStockOnly }) {
     });
     
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            
-            <tbody>{rows}</tbody>
-        </table>
+        <>
+            <TableContainer component={Paper}>
+                <Table
+                    style={{ padding: '0 1rem' }}
+                >
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Price</TableCell>
+                            <TableCell>In stock</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    
+                    <TableBody>
+                        {rows}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     );
 }
 // Path: src/components/SearchBar.jsx
