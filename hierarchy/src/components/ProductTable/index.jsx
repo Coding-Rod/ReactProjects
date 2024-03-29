@@ -10,9 +10,9 @@ export function ProductTable({ products, filterText, inStockOnly }) {
     
     products.forEach((product) => {
         if ( product.name.indexOf(filterText) === -1 && 
-             distance(product.name, filterText) > 3) return;
+             distance(product.name, filterText) > 3) return; // Discard if levenshtein distance is greater than 3
         
-        if (inStockOnly && !product.stocked) return;
+        if (inStockOnly && !product.stocked) return; // Discard if not in stock
         
         if (product.category !== lastCategory) {
             rows.push(

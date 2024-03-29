@@ -1,3 +1,5 @@
+import { TextField, Checkbox, FormControlLabel } from "@mui/material";
+
 export function SearchBar({ filterText, inStockOnly, onFilterTextChange, onInStockChange }) {
     function handleFilterTextChange(e) {
         onFilterTextChange(e.target.value);
@@ -9,24 +11,27 @@ export function SearchBar({ filterText, inStockOnly, onFilterTextChange, onInSto
     
     return (
         <form>
-            <input
+            <TextField
                 type="text"
                 placeholder="Search..."
                 value={filterText}
                 onChange={handleFilterTextChange}
+                fullWidth
             />
             
-            <p>
-                <input
-                    type="checkbox"
-                    checked={inStockOnly}
-                    onChange={handleInStockChange}
-                />
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={inStockOnly}
+                        onChange={handleInStockChange}
+                    />
+                }
+                label="Only show products in stock"
+                checked={inStockOnly}
+                onChange={handleInStockChange}
+                style={{ userSelect: 'none' }}
                 
-                {' '}
-                
-                Only show products in stock
-            </p>
+            />            
         </form>
     );
 }
