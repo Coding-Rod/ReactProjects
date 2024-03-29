@@ -5,8 +5,11 @@ export const calculateWinner = (squares) => {
         [0,4,8], [2,4,6]           // diagonals
     ]
     for (let line of lines){
+
+        if (line.some(i => !squares[i])) continue; // if any square is empty, skip
         const [a,b,c] = line
-        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+
+        if (squares[a] === squares[b] && squares[a] === squares[c]){ // if all squares are the same
             return squares[a] // X or O
         }
     }

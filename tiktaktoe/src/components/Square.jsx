@@ -4,6 +4,7 @@ export function Square({value, onClick}){
         <button 
             className="square"
             onClick={onClick}
+            disabled={value}
         >
             { value }
         </button>

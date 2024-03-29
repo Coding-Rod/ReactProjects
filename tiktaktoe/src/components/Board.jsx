@@ -1,5 +1,6 @@
 import { Square } from './Square'
 import { calculateWinner } from '../helpers'
+import { useEffect } from 'react';
 
 export function Board({ xIsNext, squares, onPlay }){
   function handleClick(i){
@@ -10,6 +11,16 @@ export function Board({ xIsNext, squares, onPlay }){
   }
   const winner = calculateWinner(squares);
   let status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;
+
+  function start_new_game(){
+    if (winner || squares.every(Boolean)){
+      setTimeout(() => {
+        onPlay(null, Array(9).fill(null));
+      }, 3000);
+    }
+  }
+
+  useEffect(start_new_game, [onPlay, squares, winner]);
 
   return (
     <>
