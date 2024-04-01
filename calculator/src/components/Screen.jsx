@@ -1,5 +1,5 @@
 import React from 'react';
-import Paper from '@mui/material/Paper';
+import { Paper, Button, Grid} from '@mui/material';
 import styled from '@emotion/styled';
 
 const Screen = styled(Paper)({
@@ -8,11 +8,24 @@ const Screen = styled(Paper)({
     color: 'black',
 });
 
-const ScreenComponent = ({ text }) => {
+const ScreenComponent = ({ text, handleErase, actionButtonText }) => {
     return (
-        <Screen>
-            {text}
-        </Screen>
+        <Grid container>
+            <Grid item xs={10}>
+                <Screen>
+                    {text}
+                </Screen>
+            </Grid>
+            <Grid item xs={2}>
+                <Button
+                    variant="outlined"
+                    fullWidth
+                    onClick={ handleErase }
+                >
+                    {actionButtonText}
+                </Button>
+            </Grid>
+        </Grid>
     );
 };
 
