@@ -4,7 +4,7 @@ import { TodoList } from './components/TodoList/TodoList';
 import { CreateTodoButton } from './components/CreateTodo/CreateTodoButton';
 import { Container } from './components/Container/Container';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './App.css';
 
@@ -15,9 +15,13 @@ const defaultTodos = [
 ];
 
 function App() {
-
   const [keyword, setKeyword] = useState('');
   const [todos, setTodos] = useState(defaultTodos);
+  const [completed, setCompleted] = useState(0);
+
+  useEffect(() => {
+    setCompleted(todos.filter((todo) => todo.completed).length);
+  }, [todos]);
 
   function createNewTodo() {
     const newTodo = prompt('Escribe el nuevo TODO');
@@ -36,7 +40,7 @@ function App() {
     <>
       <Container>
         <TodoCounter 
-          completed={todos.filter((todo) => todo.completed).length}
+          completed={completed}
           total={todos.length}
         />
         <TodoSearch 
@@ -49,7 +53,7 @@ function App() {
           keyword={keyword}
         />
         
-        </Container>
+      </Container>
       <CreateTodoButton 
         onClick={createNewTodo}
       />
