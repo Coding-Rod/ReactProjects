@@ -1,35 +1,58 @@
 import { TodoCounter } from './components/TodoCounter/TodoCounter';
 import { TodoSearch } from './components/TodoSearch/TodoSearch';
 import { TodoList } from './components/TodoList/TodoList';
-import { TodoItem } from './components/TodoList/TodoItem';
 import { CreateTodoButton } from './components/CreateTodo/CreateTodoButton';
 import { Container } from './components/Container/Container';
+
+import { useState } from 'react';
+
 import './App.css';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true },
   { text: 'Tomar el curso de intro a React', completed: false },
-  { text: 'Llorar con la llorona', completed: false },
+  { text: 'Llorar con la llorona', completed: true },
 ];
 
 function App() {
+
+  const [keyword, setKeyword] = useState('');
+  const [todos, setTodos] = useState(defaultTodos);
+
+  function createNewTodo() {
+    const newTodo = prompt('Escribe el nuevo TODO');
+    if (!newTodo) return;
+
+    const newTodos = [...todos];
+    newTodos.push({
+      text: newTodo,
+      completed: false,
+    });
+
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <Container>
         <TodoCounter 
-          completed={16}
-          total={25}
+          completed={todos.filter((todo) => todo.completed).length}
+          total={todos.length}
         />
-        <TodoSearch />
+        <TodoSearch 
+          handleSearchValue={setKeyword}
+        />
 
-        <TodoList>
-          {defaultTodos.map(todo => (
-            <TodoItem key={todo.text} text={todo.text} completed={todo.completed} />
-          ))}
-        </TodoList>
+        <TodoList
+          todos={todos}
+          setTodos={setTodos}
+          keyword={keyword}
+        />
         
         </Container>
-      <CreateTodoButton />
+      <CreateTodoButton 
+        onClick={createNewTodo}
+      />
     </>
   );
 }

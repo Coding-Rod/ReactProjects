@@ -1,3 +1,4 @@
+
 const style = {
   padding: '10px',
   fontSize: '16px',
@@ -6,13 +7,13 @@ const style = {
   margin: '10px 20px',
 };
 
+function TodoSearch({ handleSearchValue }) {
 
-
-function TodoSearch() {
   return (
-    <input 
+    <input
       style={style}
       placeholder="Cortar cebolla"
+      onChange={(event) => handleSearchValue(event.target.value)}
     />
   );
 }

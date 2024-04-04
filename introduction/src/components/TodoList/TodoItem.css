@@ -19,7 +19,6 @@ li.completed > p {
 
 li.completed > .Icon {
     color: #888;
-    cursor: no-drop;
 }
 
 li button {
