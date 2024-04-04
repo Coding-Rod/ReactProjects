@@ -37,7 +37,7 @@ function App() {
   return (
     <>
       <Container>
-        <Card>
+        <Card padding={2}>
           <Screen 
             text={result}
             handleErase={() => eraseCharacter()}
