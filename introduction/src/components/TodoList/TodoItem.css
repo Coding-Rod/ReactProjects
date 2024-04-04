@@ -1,0 +1,45 @@
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+li.completed {
+    background-color: #f0f0f0;
+}
+
+li.completed > p {
+    color: #888;
+    text-decoration: line-through;
+}
+
+li.completed > .Icon {
+    color: #888;
+    cursor: no-drop;
+}
+
+li button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.Icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.Icon-check:hover {
+    color: #00ff00;
+}
+
+.Icon-delete:hover {
+    color: #ff0000;
+}
