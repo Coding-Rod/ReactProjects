@@ -4,7 +4,8 @@ import { TodoList } from './components/TodoList/TodoList';
 import { CreateTodoButton } from './components/CreateTodo/CreateTodoButton';
 import { Container } from './components/Container/Container';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 import './App.css';
 
@@ -16,12 +17,7 @@ const defaultTodos = [
 
 function App() {
   const [keyword, setKeyword] = useState('');
-  const [todos, setTodos] = useState(defaultTodos);
-  const [completed, setCompleted] = useState(0);
-
-  useEffect(() => {
-    setCompleted(todos.filter((todo) => todo.completed).length);
-  }, [todos]);
+  const [todos, setTodos] = useLocalStorage('TODOS_V1', defaultTodos);
 
   function createNewTodo() {
     const newTodo = prompt('Escribe el nuevo TODO');
@@ -40,7 +36,7 @@ function App() {
     <>
       <Container>
         <TodoCounter 
-          completed={completed}
+          completed={todos.filter((todo) => todo.completed).length}
           total={todos.length}
         />
         <TodoSearch 
