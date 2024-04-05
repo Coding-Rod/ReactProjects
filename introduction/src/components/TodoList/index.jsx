@@ -1,5 +1,8 @@
 import Anime, { anime } from 'react-anime';
 import { TodoItem } from './TodoItem';
+import { Skeleton } from '@mui/material';
+
+import './styles.css';
 
 function TodoList({ todos, setTodos, keyword, loading, error }) {
 
@@ -46,9 +49,17 @@ function TodoList({ todos, setTodos, keyword, loading, error }) {
     });
   }
 
+  const loadingSkeletons = () => {
+    return (
+      <div className='skeleton-container'>
+        { [...Array(5)].map((_, index) => <Skeleton key={index} variant="rectangular" className='skeleton' />) }
+      </div>
+    );
+  }
+
   return (
     <>
-      {loading && <p>Loading todos...</p>}
+      {loading && loadingSkeletons()}
       {error && <p>An error has occurred!</p>}
       {(!loading && !todos.length) && <p>Create your first todo!</p>}
       {(!loading && todos.length) && 
