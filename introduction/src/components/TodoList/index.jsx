@@ -1,7 +1,7 @@
 import Anime, { anime } from 'react-anime';
 import { TodoItem } from './TodoItem';
 
-function TodoList({ todos, setTodos, keyword }) {
+function TodoList({ todos, setTodos, keyword, loading, error }) {
 
   function handleToggleComplete (text) {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
@@ -47,24 +47,31 @@ function TodoList({ todos, setTodos, keyword }) {
   }
 
   return (
-    <ul>
-      {todos
-        .filter((todo) => todo.text.toLowerCase().includes(keyword.toLowerCase()))
-        .map((todo, index) => (
-          <Anime
-            key={index}
-            >
-            <TodoItem
-              className={`todo-item-${index}`}
-              text={todo.text} 
-              completed={todo.completed}
-              onComplete={handleToggleComplete}
-              onDelete={handleDeleteTodo}
-            />
-          </Anime>
-        ))
+    <>
+      {loading && <p>Loading todos...</p>}
+      {error && <p>An error has occurred!</p>}
+      {(!loading && !todos.length) && <p>Create your first todo!</p>}
+      {(!loading && todos.length) && 
+        <ul>
+          {todos
+            .filter((todo) => todo.text.toLowerCase().includes(keyword.toLowerCase()))
+            .map((todo, index) => (
+              <Anime
+                key={index}
+                >
+                <TodoItem
+                  className={`todo-item-${index}`}
+                  text={todo.text} 
+                  completed={todo.completed}
+                  onComplete={handleToggleComplete}
+                  onDelete={handleDeleteTodo}
+                />
+              </Anime>
+            ))
+          }
+        </ul>
       }
-    </ul>
+    </>
   );
 }
 

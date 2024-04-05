@@ -5,15 +5,14 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 
 import './styles.css';
 
-const defaultTodos = [
-  { text: 'Cortar cebolla', completed: true },
-  { text: 'Tomar el curso de intro a React', completed: false },
-  { text: 'Llorar con la llorona', completed: true },
-];
-
 function App() {
   const [keyword, setKeyword] = useState('');
-  const [todos, setTodos] = useLocalStorage('TODOS_V1', defaultTodos);
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error
+  } = useLocalStorage('TODOS_V1', []);
 
   function createNewTodo() {
     const newTodo = prompt('Escribe el nuevo TODO');
@@ -25,16 +24,18 @@ function App() {
       completed: false,
     });
 
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
   return (
     <AppUI
       todos={todos}
-      setTodos={setTodos}
+      setTodos={saveTodos}
       keyword={keyword}
       setKeyword={setKeyword}
       createNewTodo={createNewTodo}
+      loading={loading}
+      error={error}
     />
   );
 }

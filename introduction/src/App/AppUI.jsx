@@ -4,8 +4,7 @@ import { TodoList } from '../components/TodoList';
 import { CreateTodoButton } from '../components/CreateTodoButton';
 import { Container } from '../components/Container';
 
-
-function App({todos, setTodos, keyword, setKeyword, createNewTodo}) {
+function App({todos, setTodos, keyword, setKeyword, createNewTodo, loading, error}) {
     return (
         <>
           <Container>
@@ -21,6 +20,8 @@ function App({todos, setTodos, keyword, setKeyword, createNewTodo}) {
               todos={todos}
               setTodos={setTodos}
               keyword={keyword}
+              loading={loading}
+              error={error}
             />
             
           </Container>
