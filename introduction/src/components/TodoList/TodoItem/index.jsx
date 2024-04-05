@@ -1,4 +1,4 @@
-import './TodoItem.css';
+import './styles.css';
 import { FaCheck, FaCircleXmark } from "react-icons/fa6";
 
 

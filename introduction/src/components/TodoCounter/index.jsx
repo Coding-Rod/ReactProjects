@@ -1,4 +1,4 @@
-import './TodoCounter.css';
+import './styles.css';
 
 // Update the TodoCounter component to use the styles object instead of the styles prop.
 // const styles = {
