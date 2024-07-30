@@ -4,21 +4,21 @@ import "./App.css";
 import { TwitterFollowCard } from "./TwitterFollowCard";
 
 export function App() {
+    const data = [
+        { isFollowing: true, userName: "midudev", children: "Miguel Angel Durán" },
+        { isFollowing: false, userName: "pheralb", children: "Fernando Herrera" },
+        { isFollowing: true, userName: "elonmusk", children: "Elon Musk" },
+        { isFollowing: false, userName: "vanderhart", children: "Kent C. Dodds" },
+    ];
+
     return (
         <React.StrictMode>
             <div className="App">
-                <TwitterFollowCard userName="midudev" isFollowing>
-                    Miguel Angel Durán
-                </TwitterFollowCard>
-                <TwitterFollowCard userName="pheralb" isFollowing={false}>
-                    Pablo Hernandez
-                </TwitterFollowCard>
-                <TwitterFollowCard userName="elonmusk" isFollowing>
-                    Elon Musk
-                </TwitterFollowCard>
-                <TwitterFollowCard isFollowing={false}>
-                    Vanderhart
-                </TwitterFollowCard>
+                {data.map((props) => (
+                    <TwitterFollowCard key={props.userName} {...props}>
+                        {props.children}
+                    </TwitterFollowCard>
+                ))}
             </div>
         </React.StrictMode>
     );
