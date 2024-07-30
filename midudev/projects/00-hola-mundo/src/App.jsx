@@ -3,20 +3,26 @@ import React from "react";
 import "./App.css";
 import { TwitterFollowCard } from "./TwitterFollowCard";
 
+const users = [
+    { userName: "midudev", name: "Miguel Angel Durán", isFollowing: true },
+    { userName: "pheralb", name: "Pablo Hernandez", isFollowing: true },
+    { userName: "elonmusk", name: "Elon Musk", isFollowing: false },
+    { userName: "vanderhart", name: "Vanderhart", isFollowing: false },
+];
+
 export function App() {
     return (
         <React.StrictMode>
             <div className="App">
-                <TwitterFollowCard userName="midudev" initialIsFollowing>
-                    Miguel Angel Durán
-                </TwitterFollowCard>
-                <TwitterFollowCard userName="pheralb" initialIsFollowing>
-                    Pablo Hernandez
-                </TwitterFollowCard>
-                <TwitterFollowCard userName="elonmusk">
-                    Elon Musk
-                </TwitterFollowCard>
-                <TwitterFollowCard>Vanderhart</TwitterFollowCard>
+                {users.map(({ userName, name, isFollowing }) => (
+                    <TwitterFollowCard
+                        userName={userName}
+                        initialIsFollowing={isFollowing}
+                        key={userName}
+                    >
+                        {name}
+                    </TwitterFollowCard>
+                ))}
             </div>
         </React.StrictMode>
     );
