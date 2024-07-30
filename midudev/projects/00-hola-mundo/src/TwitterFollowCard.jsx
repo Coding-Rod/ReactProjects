@@ -5,7 +5,15 @@ export function TwitterFollowCard({
     userName = "unknown",
     initialIsFollowing = false,
 }) {
+    // State management
     const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
+
+    // Functions
+    const buttonClassName = "tw-followCard-button " + (isFollowing ? "is-following" : "");
+    const handleClick = () => setIsFollowing(!isFollowing);
+    const buttonText = isFollowing ? "Siguiendo" : "Seguir";
+
+    // JSX
     return (
         <article className="tw-followCard">
             <header className="tw-followCard-header">
@@ -23,12 +31,11 @@ export function TwitterFollowCard({
             </header>
             <aside>
                 <button
-                    className={
-                        "tw-followCard-button " + (isFollowing ? "is-following" : "")
-                    }
-                    onClick={() => setIsFollowing(!isFollowing)}
+                    className={buttonClassName}
+                    onClick={handleClick}
                 >
-                    {isFollowing ? "Siguiendo" : "Seguir"}
+                    <span className="tw-followCard-text">{buttonText}</span>
+                    <span className="tw-followCard-stopFollow">Dejar de seguir</span>
                 </button>
             </aside>
         </article>
