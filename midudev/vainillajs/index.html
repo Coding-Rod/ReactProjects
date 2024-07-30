@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <button data-id="123">Me gusta</button>
+
+    <script>
+        const button = document.querySelector('button');
+        button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+
+            if (button.classList.contains('liked')){
+                button.classList.remove('liked');
+                button.innerText = 'Me gusta';
+            } else {
+                button.classList.add('liked');
+                button.innerText = 'Ya no me gusta';
+            }
+        });
+    </script>
+</body>
+</html>
