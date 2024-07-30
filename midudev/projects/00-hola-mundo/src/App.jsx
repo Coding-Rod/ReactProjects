@@ -1,24 +1,25 @@
+import React from "react";
+
 import "./App.css";
+import { TwitterFollowCard } from "./TwitterFollowCard";
 
 export function App() {
     return (
-        <article className="tw-followCard">
-            <header className="tw-followCard-header">
-                <img
-                    className="tw-followCard-avatar"
-                    alt="La imagen por defecto"
-                    src="https://unavatar.io/midudev"
-                />
-                <div className="tw-followCard-info">
-                    <strong>Miguel Angel Durán</strong>
-                    <span className="tw-followCard-infoUserName">@midudev</span>
-                </div>
-            </header>
-            <aside>
-                <button className="tw-followCard-button">
-                    Seguir
-                </button>
-            </aside>
-        </article>
+        <React.StrictMode>
+            <div className="App">
+                <TwitterFollowCard userName="midudev" isFollowing>
+                    Miguel Angel Durán
+                </TwitterFollowCard>
+                <TwitterFollowCard userName="pheralb" isFollowing={false}>
+                    Pablo Hernandez
+                </TwitterFollowCard>
+                <TwitterFollowCard userName="elonmusk" isFollowing>
+                    Elon Musk
+                </TwitterFollowCard>
+                <TwitterFollowCard isFollowing={false}>
+                    Vanderhart
+                </TwitterFollowCard>
+            </div>
+        </React.StrictMode>
     );
 }
