@@ -15,8 +15,17 @@ import { TURNS } from "./constants";
 import { checkWinner, checkEndGame } from "./logic/board";
 
 function App() {
-    const [board, setBoard] = useState(Array(9).fill(null));
-    const [turn, setTurn] = useState(TURNS.X);
+    const [board, setBoard] = useState(() => {
+        // Set board if exists on local storage
+        const boardFromStorage = window.localStorage.getItem("board");
+        if (!boardFromStorage) return Array(9).fill(null); // default value
+        return JSON.parse(boardFromStorage);
+    });
+    const [turn, setTurn] = useState(() => {
+        // Set board if exists on local storage
+        const turnFromStorage = window.localStorage.getItem("turn");
+        return turnFromStorage ?? TURNS.X;
+    });
     const [winner, setWinner] = useState(null);
 
     const updateBoard = (index) => {
@@ -29,11 +38,16 @@ function App() {
         setBoard(newBoard);
 
         // Change turn
-        setTurn(turn === TURNS.X ? TURNS.O : TURNS.X);
+        const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+        setTurn(newTurn);
+
+        // Save match
+        window.localStorage.setItem("board", JSON.stringify(newBoard));
+        window.localStorage.setItem("turn", newTurn);
 
         // Check winner
         const newWinner = checkWinner(newBoard);
-        if (newWinner){
+        if (newWinner) {
             confetti();
             setWinner(newWinner); // This is async
         }
@@ -46,6 +60,10 @@ function App() {
         setBoard(Array(9).fill(null));
         setTurn(TURNS.X);
         setWinner(null);
+
+        // Clear localstorage
+        window.localStorage.removeItem("board");
+        window.localStorage.removeItem("turn");
     };
 
     return (
