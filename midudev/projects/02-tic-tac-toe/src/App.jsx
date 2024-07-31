@@ -1,57 +1,23 @@
-import { useState } from "react";
+// Libraries
 import confetti from "canvas-confetti";
 
-const TURNS = {
-    X: "x",
-    O: "o",
-};
+// React hooks
+import { useState } from "react";
 
-const WINNER_COMBOS = [
-    [0, 1, 2], // Rows
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6], // Columns
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8], // Diagonals
-    [2, 4, 6],
-];
+// Components
+import { Square } from "./components/Square";
+import { WinnerModal } from "./components/WinnerModal";
 
-const Square = ({ children, isSelected = false, updateBoard, index }) => {
-    const classname = `square ${isSelected ? "is-selected" : ""}`;
+// Constants
+import { TURNS } from "./constants";
 
-    const handleClick = () => {
-        updateBoard(index);
-    };
-
-    return (
-        <div onClick={handleClick} className={classname}>
-            {children}
-        </div>
-    );
-};
+// Logic
+import { checkWinner, checkEndGame } from "./logic/board";
 
 function App() {
     const [board, setBoard] = useState(Array(9).fill(null));
     const [turn, setTurn] = useState(TURNS.X);
     const [winner, setWinner] = useState(null);
-
-    const checkWinner = (board2Check) => {
-        for (const combo of WINNER_COMBOS) {
-            const [a, b, c] = combo;
-            if (
-                board2Check[a] && // null or X pr O
-                board2Check[a] === board2Check[b] &&
-                board2Check[a] === board2Check[c]
-            )
-                return board2Check[a]; // X or O
-        }
-        return null;
-    };
-
-    // The game ends if not empty spaces in board
-    const checkEndGame = (board2Check) =>
-        board2Check.every((element) => element !== null);
 
     const updateBoard = (index) => {
         // Check if cell is not empty
@@ -104,23 +70,7 @@ function App() {
                 <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
             </section>
 
-            {winner !== null && (
-                <div className="winner">
-                    <div className="text">
-                        <h2>{winner ? "Ganó: " : "Empate"}</h2>
-
-                        <header className="win">
-                            {winner && <Square>{winner}</Square>}
-                        </header>
-
-                        <footer>
-                            <button onClick={resetGame}>
-                                Empezar de nuevo
-                            </button>
-                        </footer>
-                    </div>
-                </div>
-            )}
+            <WinnerModal winner={winner} resetGame={resetGame} />
         </main>
     );
 }
