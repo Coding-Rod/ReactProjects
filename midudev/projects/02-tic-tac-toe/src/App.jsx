@@ -2,7 +2,7 @@
 import confetti from "canvas-confetti";
 
 // React hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import { Square } from "./components/Square";
@@ -42,12 +42,6 @@ function App() {
         const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
         setTurn(newTurn);
 
-        // Save match
-        saveGame2Storage({
-            board: newBoard,
-            turn: newTurn
-        })
-
         // Check winner
         const newWinner = checkWinner(newBoard);
         if (newWinner) {
@@ -58,6 +52,14 @@ function App() {
         // Check if game is over (for draw)
         if (checkEndGame(newBoard)) setWinner(false);
     };
+
+    // Save game
+    useEffect(() => {
+        saveGame2Storage({
+            board,
+            turn
+        })
+    },[board, turn]);
 
     const resetGame = () => {
         setBoard(Array(9).fill(null));
