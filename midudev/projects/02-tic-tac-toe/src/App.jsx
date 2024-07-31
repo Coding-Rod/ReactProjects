@@ -13,6 +13,7 @@ import { TURNS } from "./constants";
 
 // Logic
 import { checkWinner, checkEndGame } from "./logic/board";
+import { saveGame2Storage, resetGameStorage } from "./logic/storage";
 
 function App() {
     const [board, setBoard] = useState(() => {
@@ -42,8 +43,10 @@ function App() {
         setTurn(newTurn);
 
         // Save match
-        window.localStorage.setItem("board", JSON.stringify(newBoard));
-        window.localStorage.setItem("turn", newTurn);
+        saveGame2Storage({
+            board: newBoard,
+            turn: newTurn
+        })
 
         // Check winner
         const newWinner = checkWinner(newBoard);
@@ -62,8 +65,7 @@ function App() {
         setWinner(null);
 
         // Clear localstorage
-        window.localStorage.removeItem("board");
-        window.localStorage.removeItem("turn");
+        resetGameStorage();
     };
 
     return (
