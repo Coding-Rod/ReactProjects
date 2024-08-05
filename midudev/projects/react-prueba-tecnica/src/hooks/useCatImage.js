@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+const CAT_PREXIS_IMAGE_URL = 'http://apimeme.com/meme?meme=Business-Cat'
+
 export function useCatImage ({ fact }) {
   const [imageUrl, setImageUrl] = useState()
   useEffect(() => {
@@ -12,7 +14,7 @@ export function useCatImage ({ fact }) {
     console.log(bottomText)
 
     // https://apimeme.com/meme?meme=Business-Cat&top=Top+text&bottom=
-    setImageUrl(`http://apimeme.com/meme?meme=Business-Cat&top=${topText}&bottom=${bottomText}`)
+    setImageUrl(`${CAT_PREXIS_IMAGE_URL}&top=${topText}&bottom=${bottomText}`)
   }, [fact])
 
   return { imageUrl }
