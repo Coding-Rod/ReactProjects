@@ -16,7 +16,8 @@ function NoResultsFound() {
   return <p>No se encontraron resultados</p>;
 }
 
-function Movies({ hasMovies, movies }) {
+function Movies({ movies }) {
+  const hasMovies = movies?.length > 0;
   return hasMovies ? <ListOfMovies movies={movies} /> : <NoResultsFound />;
 }
 

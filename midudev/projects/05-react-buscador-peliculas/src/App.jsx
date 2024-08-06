@@ -5,9 +5,9 @@ import responseMovies from "./mocks/with-results.json";
 
 function App() {
   const movies = responseMovies.Search;
-  const hasMovies = movies?.length > 0;
+
   return (
-    <div>
+    <div className="page">
       <header>
         <h1>Buscador de peliculas</h1>
         <form className="form">
@@ -17,7 +17,7 @@ function App() {
       </header>
 
       <main>
-        <Movies hasMovies={hasMovies} movies={movies} />
+        <Movies movies={movies} />
       </main>
     </div>
   );
