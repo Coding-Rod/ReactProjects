@@ -1,16 +1,22 @@
 import "./App.css";
-import { useRef } from "react";
 import { Movies } from './components/Movies';
 import { useMovies } from './hooks/useMovies.js';
 
 function App() {
   const { movies } = useMovies()
-  const inputRef = useRef()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const value = inputRef.current.value
-    console.log(value)
+    const { query } = Object.fromEntries(
+      new FormData(event.target)
+    )
+    console.log(query)
+
+    // En caso de existir más campos:
+    /*
+    const fields = Object.fromEntries(new window.FormData(event.target))
+    console.log(fields)
+    */
 
   }
  
@@ -19,7 +25,7 @@ function App() {
       <header>
         <h1>Buscador de peliculas</h1>
         <form className="form" onSubmit={handleSubmit}>
-          <input ref={inputRef} type="text" placeholder="Avengers, Star Wars, The Matrix..." />
+          <input name="query" type="text" placeholder="Avengers, Star Wars, The Matrix..." />
           <button type="submit">Buscar</button>
         </form>
       </header>
