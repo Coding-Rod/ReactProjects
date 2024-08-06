@@ -5,21 +5,28 @@ import { useSearch } from "./hooks/useSearch.js";
 
 // Components
 import { Movies } from "./components/Movies";
+import { useState } from "react";
 
 function App() {
+  const [sort, setSort] = useState(false)
+
   const { search, updateSearch, error } = useSearch();
   const {
     movies,
     getMovies,
     loading,
     error: fetchError,
-  } = useMovies({ search });
+  } = useMovies({ search, sort });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (error) return;
-    getMovies();
+    getMovies({ search });
   };
+
+  const handleSort = () => {
+    setSort(!sort)
+  }
 
   const handleChange = (event) => {
     updateSearch(event.target.value);
@@ -41,9 +48,11 @@ function App() {
               borderColor: error ? "red" : "transparent",
             }}
           />
+          <input type="checkbox" onClick={handleSort} checked={sort} />
           <button type="submit">Buscar</button>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
+
       </header>
 
       <main>
