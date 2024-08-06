@@ -7,17 +7,22 @@ import { useSearch } from "./hooks/useSearch.js";
 import { Movies } from "./components/Movies";
 
 function App() {
-  const {search, updateSearch, error} = useSearch()
-  const { movies, getMovies } = useMovies({ search });
+  const { search, updateSearch, error } = useSearch();
+  const {
+    movies,
+    getMovies,
+    loading,
+    error: fetchError,
+  } = useMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (error) return
-    getMovies()
+    if (error) return;
+    getMovies();
   };
 
   const handleChange = (event) => {
-    updateSearch(event.target.value)
+    updateSearch(event.target.value);
   };
 
   return (
@@ -32,8 +37,8 @@ function App() {
             type="text"
             placeholder="Avengers, Star Wars, The Matrix..."
             style={{
-              border: '1px solid transparent',
-              borderColor: error ? 'red' : 'transparent'
+              border: "1px solid transparent",
+              borderColor: error ? "red" : "transparent",
             }}
           />
           <button type="submit">Buscar</button>
@@ -42,7 +47,7 @@ function App() {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        <Movies movies={movies} loading={loading} error={fetchError} />
       </main>
     </div>
   );

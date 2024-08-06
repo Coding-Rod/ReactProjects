@@ -1,4 +1,6 @@
-function ListOfMovies({ movies }) {
+function ListOfMovies({ movies, loading, error }) {
+  if (loading) return (<p>Loading...</p>)
+  if (error) return (<span style={{color: 'red'}}>{error}</span>)
   return (
     <ul className="movies">
       {movies.map((movie) => (
@@ -16,9 +18,9 @@ function NoResultsFound() {
   return <p>No se encontraron resultados</p>;
 }
 
-function Movies({ movies }) {
+function Movies({ movies, loading, error }) {
   const hasMovies = movies?.length > 0;
-  return hasMovies ? <ListOfMovies movies={movies} /> : <NoResultsFound />;
+  return hasMovies ? <ListOfMovies movies={movies} loading={loading} error={error} /> : <NoResultsFound />;
 }
 
 export { Movies };
