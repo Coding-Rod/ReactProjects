@@ -7,12 +7,13 @@ import { useSearch } from "./hooks/useSearch.js";
 import { Movies } from "./components/Movies";
 
 function App() {
-  const { movies } = useMovies();
   const {search, updateSearch, error} = useSearch()
+  const { movies, getMovies } = useMovies({ search });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ search });
+    if (error) return
+    getMovies()
   };
 
   const handleChange = (event) => {
