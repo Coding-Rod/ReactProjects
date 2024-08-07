@@ -1,0 +1,42 @@
+[
+  {
+    "image_path": "uploads/0a3UtNzl5Ll3sq8K.png",
+    "classification": {
+      "inference_id": "55cf8105-a7fd-416b-84f3-85a621d6b9d9",
+      "time": 0.04243398900007378,
+      "image": { "width": 300, "height": 200 },
+      "predictions": [
+        {
+          "x": 158.0,
+          "y": 84.0,
+          "width": 262.0,
+          "height": 150.0,
+          "confidence": 0.7896538972854614,
+          "class": "Paper",
+          "class_id": 0,
+          "detection_id": "bfce98f8-3a66-429f-a5de-232bd6c94dc5"
+        }
+      ]
+    }
+  },
+  {
+    "image_path": "uploads/0CSaM2vL2cWX6Cay.png",
+    "classification": {
+      "inference_id": "665a22c1-1a56-4f42-bae2-b1f8c0dadf9e",
+      "time": 0.03673931699995592,
+      "image": { "width": 300, "height": 200 },
+      "predictions": [
+        {
+          "x": 160.5,
+          "y": 110.0,
+          "width": 277.0,
+          "height": 114.0,
+          "confidence": 0.5424872636795044,
+          "class": "Paper",
+          "class_id": 0,
+          "detection_id": "440c6038-3c2d-46c9-983e-eafdfdf95031"
+        }
+      ]
+    }
+  }
+]

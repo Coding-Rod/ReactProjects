@@ -1,0 +1,4 @@
+fastapi==0.112.0
+inference_sdk==0.15.2
+python-decouple==3.8
+Werkzeug==3.0.3
