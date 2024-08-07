@@ -1,14 +1,18 @@
+// Libraries
+import debounce from "just-debounce-it";
+
 import "./App.css";
+
 // Hooks
 import { useMovies } from "./hooks/useMovies.js";
 import { useSearch } from "./hooks/useSearch.js";
 
 // Components
 import { Movies } from "./components/Movies";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function App() {
-  const [sort, setSort] = useState(false)
+  const [sort, setSort] = useState(false);
 
   const { search, updateSearch, error } = useSearch();
   const {
@@ -18,18 +22,27 @@ function App() {
     error: fetchError,
   } = useMovies({ search, sort });
 
+  const debouncedGetMovies = useCallback(
+    debounce((search) => {
+      getMovies({ search });
+    }, 500)
+  ,[]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (error) return;
+    if (error) return
     getMovies({ search });
   };
 
   const handleSort = () => {
     setSort(!sort)
-  }
+  };
 
   const handleChange = (event) => {
-    updateSearch(event.target.value);
+    const newSearch = event.target.value
+    updateSearch(newSearch)
+    if (error) return
+    debouncedGetMovies(newSearch);
   };
 
   return (
@@ -48,11 +61,10 @@ function App() {
               borderColor: error ? "red" : "transparent",
             }}
           />
-          <input type="checkbox" onClick={handleSort} checked={sort} />
+          <input type="checkbox" onChange={handleSort} checked={sort} />
           <button type="submit">Buscar</button>
         </form>
         {error && <p style={{ color: "red" }}>{error}</p>}
-
       </header>
 
       <main>
