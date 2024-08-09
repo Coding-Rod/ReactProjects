@@ -5,10 +5,14 @@ import './App.css'
 import { Categories } from './components/Categories'
 import { Cards } from './components/Cards'
 import { Modal} from './components/Modal'
+
+// Hooks
 import { useState } from 'react'
+import { useCards } from './hooks/useCards'
 
 function App() {
   const [show, setShow] = useState(false)
+  const { cards } = useCards()
 
   return (
     <div>
@@ -16,7 +20,7 @@ function App() {
         <Categories />
       </aside>
       <main>
-        <Cards showModal={setShow} />
+        <Cards cards={cards} showModal={setShow} />
         <Modal show={show} setShow={setShow} />
       </main>
     </div>
