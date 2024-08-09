@@ -1,4 +1,4 @@
-const API_URL = 'http:://localhost:800/classify-image'
+const API_URL = 'http://localhost:8000/classify-image'
 
 function Modal({ show, setShow }){
 
