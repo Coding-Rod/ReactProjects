@@ -1,5 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 from werkzeug.utils import secure_filename
 import os
 import json
@@ -16,6 +18,14 @@ CLIENT = InferenceHTTPClient(
 )
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 @app.post('/classify-image')
 async def classify_image_endpoint(file: UploadFile = File(...)):
@@ -40,7 +50,8 @@ async def classify_image_endpoint(file: UploadFile = File(...)):
             
         data.append({
             'image_path': temp_path,
-            'classification': result
+            'classification': result,
+            'id': len(data+1)
         })
         
         with open('db.json', 'w') as f:
@@ -50,7 +61,7 @@ async def classify_image_endpoint(file: UploadFile = File(...)):
     except Exception as e:
         return JSONResponse(content={'error': str(e)}, status_code=500)
 
-@app.get('/get-data')
+@app.get('/')
 async def get_data():
     try:
         with open('db.json') as f:

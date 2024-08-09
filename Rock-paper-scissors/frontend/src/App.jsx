@@ -3,6 +3,8 @@ import './App.css'
 
 // Components
 import { Categories } from './components/Categories'
+import { Cards } from './components/Cards'
+import { Modal} from './components/Modal'
 
 function App() {
 
@@ -11,7 +13,10 @@ function App() {
       <aside>
         <Categories />
       </aside>
-      <main>World</main>
+      <main>
+        <Cards />
+        <Modal />
+      </main>
     </div>
   )
 }

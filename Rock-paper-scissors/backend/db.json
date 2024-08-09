@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "image_path": "uploads/0a3UtNzl5Ll3sq8K.png",
     "classification": {
       "inference_id": "55cf8105-a7fd-416b-84f3-85a621d6b9d9",
@@ -20,6 +21,7 @@
     }
   },
   {
+    "id": 2,
     "image_path": "uploads/0CSaM2vL2cWX6Cay.png",
     "classification": {
       "inference_id": "665a22c1-1a56-4f42-bae2-b1f8c0dadf9e",

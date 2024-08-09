@@ -5,7 +5,6 @@ div {
 
   display: grid;
   grid-template-columns: 150px 1fr;
-  width: 100vw;
 }
 
 aside {
@@ -19,12 +18,11 @@ aside div {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  padding: 10px;
 }
 
 main {
-  width: 100%;
+  width: auto;
 }
 
 .categories {
@@ -45,4 +43,51 @@ main {
 .categorie * {
   margin: 0;
   padding: 0;
+}
+
+.cards {
+  display: flex;
+  gap: 30px;
+  padding: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 60vw;
+}
+
+.card {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  background: gray;
+}
+
+.card img{
+  width: 70%;
+}
+
+.card h1 {
+  font-size: 70px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.card {
+  padding: 0;
+}
+
+button.card :hover {
+  background: white;
+  padding: 0;
+  border: 1px solid black;
+  border-radius: 10px;
 }
