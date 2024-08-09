@@ -3,14 +3,13 @@ const FILE_PREFIX = 'http://localhost:8081/'
 
 import { useEffect, useState } from "react";
 
-function Cards() {
+function Cards({ showModal }) {
     const [cards, setCards] = useState()
 
     useEffect(() => {
         fetch(API_URL)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 const newData = data.map(element => {
                     return {
                         id: element.id,
@@ -19,10 +18,14 @@ function Cards() {
                         confidence: parseFloat(element.classification.predictions[0].confidence).toFixed(4) * 100
                     }
                 })
-                console.log({newData})
                 setCards(newData)
             })
     }, [])
+
+    const handleClick = () => {
+        showModal(true)
+    }
+
     return (
         <div className="cards">
             {cards && ( cards.map(card => {
@@ -34,10 +37,9 @@ function Cards() {
                     </div>
                 )
             }))}
-            <button className="card">
+            <button className="add" onClick={handleClick}>
                 <h1>+</h1>
             </button>
-            
         </div>
     );
 }

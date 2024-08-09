@@ -1,9 +1,10 @@
-import os
 from inference_sdk import InferenceHTTPClient
 
+from decouple import config
+
 CLIENT = InferenceHTTPClient(
-    api_url="https://detect.roboflow.com",
-    api_key="iBQOHdH1RIkiCmXTzFLn"
+    api_url=config('API_URL'),
+    api_key=config('API_KEY')
 )
 
 def classify_image(image_path):
