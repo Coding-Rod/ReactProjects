@@ -7,14 +7,19 @@ import { Cards } from "./components/Cards";
 import { Modal } from "./components/Modal";
 
 // Hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCards } from "./hooks/useCards";
 import { useCategories } from "./hooks/useCategories";
 
 function App() {
   const [show, setShow] = useState(false);
   const { categories, updateCategories } = useCategories();
-  const { cards } = useCards({ categories });
+  const { cards, getCards } = useCards({ categories });
+
+  // Get cards on mount
+  useEffect(() => {
+    getCards({ categories });
+  }, [categories]);
 
   return (
     <div>

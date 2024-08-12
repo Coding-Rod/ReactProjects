@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 function useCategories() {
     const [categories, setCategories] = useState({
-        all: false,
+        all: true,
         rock: false,
         paper: false,
         scissors: false,
@@ -16,7 +16,9 @@ function useCategories() {
     }
 
     useEffect(() => {
-        if (categories.all && (categories.rock || categories.paper || categories.scissors)) {
+        if ((categories.all) &&
+            (categories.rock || categories.paper || categories.scissors)
+        ) {
             setCategories({
                 all: true,
                 rock: false,

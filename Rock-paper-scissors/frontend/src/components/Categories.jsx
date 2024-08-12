@@ -1,6 +1,5 @@
 function Categories({ categories, updateCategories }) {
   const handleChange = (event) => {
-    console.log({ categories });
     const { id } = event.target;
     updateCategories({ id });
   };
