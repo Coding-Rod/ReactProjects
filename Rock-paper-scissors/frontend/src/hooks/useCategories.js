@@ -1,38 +1,33 @@
 import { useState, useEffect } from "react"
 
 function useCategories() {
-    const [all, setAll] = useState(false)
-    const [rock, setRock] = useState(false)
-    const [paper, setPaper] = useState(false)
-    const [scissors, setScissors] = useState(false)
+    const [categories, setCategories] = useState({
+        all: false,
+        rock: false,
+        paper: false,
+        scissors: false,
+    });
 
     const updateCategories = ({ id }) => {
-        switch (id) {
-            case 'all':
-                setAll(!all)
-                break
-            case 'rock':
-                setRock(!rock)
-                break
-            case 'paper':
-                setPaper(!paper)
-                break
-            case 'scissors':
-                setScissors(!scissors)
-                break
-        }
+        setCategories({
+            ...categories,
+            [id]: !categories[id]
+        })
     }
 
     useEffect(() => {
-        if (all) {
-            setRock(false)
-            setPaper(false)
-            setScissors(false)
+        if (categories.all && (categories.rock || categories.paper || categories.scissors)) {
+            setCategories({
+                all: true,
+                rock: false,
+                paper: false,
+                scissors: false,
+            })
         }
-    }, [all])
+    }, [categories])
 
     return {
-        categories: { all, rock, paper, scissors },
+        categories: categories,
         updateCategories
     }
 }

@@ -3,30 +3,33 @@ const FILE_PREFIX = 'http://localhost:8081/'
 
 import { useEffect, useMemo, useState } from "react";
 
-function useCards({ categories = {} }) {
+function useCards({ categories }) {
     const [cards, setCards] = useState()
     
-    const categoriesToFetch = useMemo(() => {
-        console.log({categories})
-        return  Object.keys(categories).filter(key => categories[key])
-    }, [categories])
-
+    const selectedCategories = useMemo(() => {
+        return Object.keys(categories).filter(key => categories[key]);
+    }, [categories]);
+    
     useEffect(() => {
-        console.log(categoriesToFetch)
         fetch(API_URL)
             .then(response => response.json())
             .then(data => {
-                const newData = data.map(element => {
-                    return {
-                        id: element.id,
-                        image_url: FILE_PREFIX + element.image_path,
-                        name: element.classification.predictions[0].class,
-                        confidence: parseFloat(element.classification.predictions[0].confidence).toFixed(4) * 100
+                const filteredData = data.filter((element) => {
+                    const elementClass = element.classification.predictions[0].class.toLowerCase();
+                    if (categories.all || selectedCategories.length === 0) {
+                        return true;
                     }
-                })
-                setCards(newData)
-            })
-    }, [])
+                    return selectedCategories.includes(elementClass);
+                });
+                const newData = filteredData.map((element) => ({
+                    id: element.id,
+                    image_url: FILE_PREFIX + element.image_path,
+                    name: element.classification.predictions[0].class,
+                    confidence: (parseFloat(element.classification.predictions[0].confidence) * 100).toFixed(2),
+                }));
+                setCards(newData);
+            });
+    }, [categories, selectedCategories]);    
 
     return {
         cards

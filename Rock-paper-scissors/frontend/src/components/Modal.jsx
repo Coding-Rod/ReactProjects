@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000/classify-image'
+const POST_API_URL = 'http://localhost:8000/classify-image'
 
 function Modal({ show, setShow }){
 
@@ -15,7 +15,7 @@ function Modal({ show, setShow }){
         <button onClick={handleClick}
         >x</button>
         <div className="modal__content">
-            <form action={API_URL} method="post">
+            <form action={POST_API_URL} method="post">
                 <div>
                     <label>Upload an image</label>
                     <input type="file" name="file" id="file" />
