@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Products } from "./components/Products";
 import { products as initialProducts } from "./mocks/products.json";
 import { useMemo } from "react";
+import { Header } from "./components/Header";
 
 function App() {
   const [products] = useState(initialProducts);
@@ -19,9 +20,14 @@ function App() {
         (filters.category === "all" || product.category === filters.category)
       );
     });
-    },[products,filters])
+  }, [products, filters]);
 
-  return <Products products={filteredProducts} />;
+  return (
+    <>
+      <Header setFilters={setFilters}/>
+      <Products products={filteredProducts} />
+    </>
+  );
 }
 
 export default App;
