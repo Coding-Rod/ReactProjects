@@ -3,9 +3,10 @@ import { Products } from "./components/Products";
 import { products as initialProducts } from "./mocks/products.json";
 import { useMemo } from "react";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { IS_DEVELOPMENT } from "./config";
 
-function App() {
-  const [products] = useState(initialProducts);
+function useFilters({ products }) {
   const [filters, setFilters] = useState({
     category: "all",
     minPrice: 0,
@@ -22,10 +23,22 @@ function App() {
     });
   }, [products, filters]);
 
+  return {
+    filters,
+    filteredProducts,
+    setFilters,
+  };
+}
+
+function App() {
+  const [products] = useState(initialProducts);
+  const { filters, filteredProducts, setFilters } = useFilters({ products });
+
   return (
     <>
-      <Header setFilters={setFilters}/>
+      <Header setFilters={setFilters} />
       <Products products={filteredProducts} />
+      {IS_DEVELOPMENT ? <Footer filters={filters}/> : <Footer />}
     </>
   );
 }
