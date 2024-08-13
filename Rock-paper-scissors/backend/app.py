@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, Query
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -37,7 +37,7 @@ async def classify_image_endpoint(file: UploadFile = File(...)):
             data = []
             
         data.append({
-            'image_path': temp_path,
+            'image_path': temp_path.split('/')[-1],
             'classification': result,
             'id': len(data+1)
         })
@@ -50,18 +50,23 @@ async def classify_image_endpoint(file: UploadFile = File(...)):
         return JSONResponse(content={'error': str(e)}, status_code=500)
 
 @app.get('/')
-async def get_data(class_name: str = None):
+async def get_data(class_names: list[str] = Query(default=[])):
     try:
         with open('db.json') as f:
             data = json.load(f)
         
-        if not class_name:
+        if not class_names:
             return JSONResponse(content=data)
+        
+        def classname_filter(x):
+            return x['classification']['predictions'][0]['class'] in [
+                class_name.title() for class_name in class_names 
+            ]
         
         return JSONResponse(
             content=list(
                 filter(
-                    lambda x: x['classification']['predictions'][0]['class'] == class_name.title(),
+                    lambda x: classname_filter(x),
                     data
                 )
             )
