@@ -1,9 +1,11 @@
 import "./Footer.css";
+import { IS_DEVELOPMENT } from "../config";
+import { useFilters } from "../hooks/useFilters";
 
-export function Footer({ filters = null }) {
-  // const { filters } = useFilters()
+export function Footer() {
+  const { filters } = useFilters()
 
-  if (!filters) {
+  if (!IS_DEVELOPMENT) {
     return (
       <footer className="footer">
         <h4>
