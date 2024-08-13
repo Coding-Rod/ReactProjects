@@ -1,9 +1,11 @@
 import { useEffect, useId, useState } from "react";
 import "./Filters.css";
+import { useFilters } from "../hooks/useFilters";
 
-export function Filters({ setFilters }) {
+export function Filters() {
   const [minPrice, setMinPrice] = useState(0);
   const [category, setCategory] = useState('all')
+  const { setFilters } = useFilters()
 
   const minPriceFilterId = useId()
   const categoryFilterId = useId()

@@ -1,44 +1,22 @@
 import { useState } from "react";
 import { Products } from "./components/Products";
 import { products as initialProducts } from "./mocks/products.json";
-import { useMemo } from "react";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { IS_DEVELOPMENT } from "./config";
-
-function useFilters({ products }) {
-  const [filters, setFilters] = useState({
-    category: "all",
-    minPrice: 0,
-  });
-
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      return (
-        // First filter
-        product.price >= filters.minPrice &&
-        // Second filter
-        (filters.category === "all" || product.category === filters.category)
-      );
-    });
-  }, [products, filters]);
-
-  return {
-    filters,
-    filteredProducts,
-    setFilters,
-  };
-}
+import { useFilters } from "./hooks/useFilters";
 
 function App() {
   const [products] = useState(initialProducts);
-  const { filters, filteredProducts, setFilters } = useFilters({ products });
+  const { filters, filterProducts } = useFilters();
+
+  const filteredProducts = filterProducts({ products });
 
   return (
     <>
-      <Header setFilters={setFilters} />
+      <Header />
       <Products products={filteredProducts} />
-      {IS_DEVELOPMENT ? <Footer filters={filters}/> : <Footer />}
+      {IS_DEVELOPMENT ? <Footer filters={filters} /> : <Footer />}
     </>
   );
 }
