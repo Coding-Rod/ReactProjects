@@ -1,6 +1,8 @@
 // Libraries
 import debounce from "just-debounce-it";
+import { useCallback, useState } from "react";
 
+// Css
 import "./App.css";
 
 // Hooks
@@ -9,7 +11,6 @@ import { useSearch } from "./hooks/useSearch.js";
 
 // Components
 import { Movies } from "./components/Movies";
-import { useCallback, useState } from "react";
 
 function App() {
   const [sort, setSort] = useState(false);
