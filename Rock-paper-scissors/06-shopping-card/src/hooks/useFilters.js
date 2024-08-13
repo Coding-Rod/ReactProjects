@@ -1,7 +1,7 @@
-import { useMemo, useContext, useCallback } from "react";
+import { useContext, useCallback } from "react";
 import { FiltersContext } from "../context/filters";
 
-function useFilters() {
+function useFilters () {
 	const { filters, setFilters } = useContext(FiltersContext);
 
 	const filterProducts = useCallback(({ products }) => {
@@ -10,7 +10,8 @@ function useFilters() {
 				// First filter
 				product.price >= filters.minPrice &&
 				// Second filter
-				(filters.category === "all" || product.category === filters.category)
+				(filters.category === "all"
+					|| product.category === filters.category)
 			);
 		});
 	}, [filters]);
