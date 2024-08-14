@@ -1,4 +1,4 @@
-export function CartItem({ id, thumbnail, title, price, quantity, addToCard}) {
+export function CartItem({ id, thumbnail, title, price, quantity, addToCart, removeFromCart}) {
   return (
     <li key={id}>
       <img src={thumbnail} alt={title} />
@@ -8,7 +8,8 @@ export function CartItem({ id, thumbnail, title, price, quantity, addToCard}) {
 
       <footer>
         <small>Qty: {quantity}</small>
-        <button onClick={addToCard}>+</button>
+        <button onClick={addToCart}>+</button>
+        <button onClick={removeFromCart}>🗑️</button>
       </footer>
     </li>
   );

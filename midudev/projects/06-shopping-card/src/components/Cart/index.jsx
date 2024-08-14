@@ -7,7 +7,7 @@ import { CartItem } from "./CartItem";
 
 export function Cart() {
   const cartCheckBoxId = useId();
-  const { cart, addToCart, clearCart } = useCart();
+  const { cart, addToCart, removeFromCart, clearCart } = useCart();
 
   return (
     <>
@@ -21,7 +21,8 @@ export function Cart() {
           {cart.map((product) => (
             <CartItem
               key={product.id}
-              addToCard={() => addToCart(product)}
+              addToCart={() => addToCart(product)}
+              removeFromCart={() => removeFromCart(product)}
               {...product}
             />
           ))}
