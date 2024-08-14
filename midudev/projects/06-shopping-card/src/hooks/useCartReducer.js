@@ -1,5 +1,5 @@
 
-import { useReducer } from "react"
+import { useEffect, useReducer } from "react"
 import { cartReducer, cartInitialState} from "../reducers/cart.js"
 
 export function useCartReducer () {
@@ -16,6 +16,11 @@ export function useCartReducer () {
   })
   
   const clearCart = () => dispatch({type: 'CLEAR_CART'})
+
+  useEffect(() => {
+    window.localStorage.setItem('cart', JSON.stringify(state))
+  }, [state])
+
   return {
     cart: state,
     addToCart,
