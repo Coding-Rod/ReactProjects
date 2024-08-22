@@ -5,26 +5,22 @@ import SearchPage from "./pages/Search";
 import Page404 from "./pages/404";
 
 import { Router } from "./Router";
+import { Route } from "./Route";
 
 const appRoutes = [
   {
-    path: "/",
-    Component: HomePage,
-  },
-  {
-    path: "/about",
-    Component: AboutPage,
-  },
-  {
     path: "/search/:query",
-    Component: SearchPage
+    Component: SearchPage,
   },
 ];
 
 function App() {
   return (
     <main>
-      <Router routes={appRoutes} defaultComponent={Page404} />
+      <Router routes={appRoutes} defaultComponent={Page404}>
+        <Route path="/" Component={HomePage} />
+        <Route path="/about" Component={AboutPage} />
+      </Router>
     </main>
   );
 }

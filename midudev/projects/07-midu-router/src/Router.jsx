@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Children } from "react";
 import { EVENTS } from "./constants";
 import { match } from "path-to-regexp";
 
 export function Router({
+  children,
   routes = [],
   defaultComponent: DefaultComponent = () => <h1>404 Page not found</h1>,
 }) {
@@ -24,7 +25,14 @@ export function Router({
 
   let routeParams = {}
 
-  const Page = routes.find(({ path }) => {
+  const routesFromChildren = Children.map(children, ({ props, type }) => {
+    const { name } = type // Type name is the component name. Ex: Route
+    return name === 'Route' ? props : null // props are the props from the Component as a JS Object
+  })
+
+  const routesToUse = routes.concat(routesFromChildren)
+
+  const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true
 
     // This code detects dynamic routes
