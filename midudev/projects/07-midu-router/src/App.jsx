@@ -1,6 +1,7 @@
 import "./App.css";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
+import SearchPage from "./pages/Search";
 import Page404 from "./pages/404";
 
 import { Router } from "./Router";
@@ -15,18 +16,15 @@ const appRoutes = [
     Component: AboutPage,
   },
   {
-    path: '/twitch',
-    Component: () => <h1>New Twitch</h1>
-  }
-] 
+    path: "/search/:query",
+    Component: SearchPage
+  },
+];
 
 function App() {
   return (
     <main>
-      <Router
-        routes={appRoutes}
-        defaultComponent={Page404}
-      />
+      <Router routes={appRoutes} defaultComponent={Page404} />
     </main>
   );
 }
