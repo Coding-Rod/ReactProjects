@@ -1,4 +1,3 @@
-import React from "react";
 import { type Todo as TodoType } from "../types";
 
 interface Props extends TodoType {
