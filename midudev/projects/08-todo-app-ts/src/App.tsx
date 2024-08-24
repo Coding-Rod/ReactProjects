@@ -3,6 +3,7 @@ import { Todos } from "./components/Todos";
 import { FilterValue, type Todo as TodoType } from "./types";
 import { TODO_FILTERS } from "./consts";
 import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 
 const mockTodos = [
   {
@@ -65,8 +66,23 @@ export function App(): JSX.Element {
     setTodos(newTodos)
   }
 
+  const handleAddTodo = ({title}: {title: TodoType['title']}): void => {
+    const newTodos = [
+      ...todos,
+      {
+        id: crypto.randomUUID(),
+        title: title,
+        completed: false
+      }
+    ]
+    setTodos(newTodos)
+  }
+
   return (
     <div className="todoapp">
+      <Header
+        onAddTodo = {handleAddTodo}
+      />
       <Todos
         todos={filteredTodos}
         onRemoveTodo={handleRemove}
